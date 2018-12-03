@@ -1,0 +1,30 @@
+= content_for :hero do
+  .row.hero
+    .container
+      .row
+        .col-12.text-left
+          .space3
+          .space3
+          %h1.display-1.mt-1 BloBlo
+          .space3
+          %h2.display-4{:style => "font-size:5.5rem;"} BLOckchain micro BLOg
+          .space3
+        .col-md-6.col-sm-12
+          %p.h4.hero-giveaway
+            = succeed ',' do
+              = link_to "Open source", "https://github.com/izwx/bloblo", target: :_blank
+            on Ethereum, with built-in support for federation.
+            %br
+            No walled gardens here.
+.row
+  .col-12
+    -# .text-center
+    -#   %i.display-4.fa.fa-chevron-down
+    .space3
+    -# .space6
+    %h2.display-4 Write something on a blockchain.
+    .space6
+    .space6
+  
+    %h3
+      It's like Twitter, but with cutting edge distributed technologies, so no central entity owns your data.

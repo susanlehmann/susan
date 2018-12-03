@@ -1,0 +1,5 @@
+web: bin/rails s -p 9000 -b 0.0.0.0
+webpack: bin/webpack-dev-server
+sidekiq: bundle exec sidekiq
+guard: bundle exec guard -P livereload
+ipfs: ipfs daemon

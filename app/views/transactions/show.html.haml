@@ -1,0 +1,97 @@
+.row
+  .col-12
+    %h3.pre-wrap.mb-3.mt-0{title: @transaction.hash_address}
+      = @transaction.hash_address
+    
+    %h5.mb-3
+      Transaction created
+      = time_ago_in_words @transaction.block.try(:timestamp) || @transaction.created_at
+      ago
+
+    .mt-3.mb-3
+
+    - if @transaction.block_number.blank?
+      .alert.alert-danger
+        %h5
+          This transaction is still pending.
+          
+    %dl.row
+      - if confirmations = @transaction.confirmations
+        %dt.col-3 Confirmations
+        %dd.col-9= number_with_delimiter confirmations
+
+      - if ENV['CHAIN_ID'] == '1'
+        %dt.col-3 View on Etherscan
+        %dd.col-9.text-truncate= link_to @transaction.hash_address, "https://etherscan.io/tx/#{@transaction.hash_address}", target: :_blank
+      
+      - if ENV['CHAIN_ID'] == '3'
+        %dt.col-3 View on Etherscan
+        %dd.col-9.text-truncate= link_to @transaction.hash_address, "https://ropsten.etherscan.io/tx/#{@transaction.hash_address}", target: :_blank
+
+      - if @transaction.message
+        %dt.col-3 Message
+        %dd.col-9.text-truncate= link_to "View Message", @transaction.message
+      
+      - if @transaction.message.try(:user)
+        %dt.col-3 User
+        %dd.col-9= link_to "@#{@transaction.message.user.username}", user_path(@transaction.message.user.username)
+
+      %dt.col-3 Value
+      %dd.col-9= humanized_money_with_symbol @transaction.value
+    
+      %dt.col-3 Gas
+      %dd.col-9= @transaction.gas
+
+      %dt.col-3 Gas Price
+      %dd.col-9= @transaction.gas_price
+
+      %dt.col-3 From
+      %dd.col-9
+        = link_to_account(@transaction.from_account) if @transaction.from_account
+
+      %dt.col-3 To
+      %dd.col-9
+        = link_to_account(@transaction.to_account) if @transaction.to_account
+
+      %dt.col-3 Nonce
+      %dd.col-9
+        %code= @transaction.nonce
+
+      %dt.col-3 Input
+      %dd.col-9
+        %code= @transaction.input
+
+    %hr.mt-3.mb-3
+    
+    %h4 Block Details:
+
+    %dl.row
+      
+      %dt.col-3 Block Number
+      %dd.col-9= @transaction.block_number
+
+      %dt.col-3 Block Hash
+      %dd.col-9
+        %code= @transaction.block_hash || "n/a"
+
+    - if @transaction.transactable&.is_a?(Batch)
+      - batch = @transaction.transactable
+      %hr.mt-3.mb-3
+      
+      %h4 Batch Details:
+
+      %dl.row
+        - batch.batch_items.each do |batch_item|
+          - batchable = batch_item.batchable
+          %dt.col-3= batchable.class
+          %dd.col-9
+            - if batchable.is_a?(Message)
+              = link_to batchable.title || batchable.body, message_path(batchable), class: 'text-truncate'
+            - elsif batchable.is_a?(Account)
+              'Account Update'
+            - elsif batchable.is_a?(Favorite)
+              = link_to "Favorite of post by @#{batchable.message.account.username}", message_path(batchable.message)
+            - elsif batchable.is_a?(Follow)
+              = link_to "Follow of @#{batchable.to_account.username}", account_path(batchable.to_account.username)
+            - else
+              = batchable.id

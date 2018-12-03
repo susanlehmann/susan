@@ -1,0 +1,106 @@
+!!!
+%html
+
+  %head
+    %title
+      - if content_for? :title
+        = yield(:title)
+        = " - "
+      BloBlo - BLOckchain micro BLOg
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1.0"}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    -# = javascript_pack_tag "global"
+    -# = stylesheet_pack_tag "global"
+    = csrf_meta_tag
+    -# = favicon_link_tag
+
+    %meta{ property: 'og:image', content: 'BloBlo'}
+    %meta{ property: 'og:title', content: 'BloBlo: BLOckchain micro BLOg' }
+    %meta{ property: 'og:description', content: "It's a social network that is run entirely on a blockchain, so no central entity owns your data. We use Ethereum smart contracts and IPFS to store data in a distributed way."}
+    %meta{ property: 'description', content: "It's a social network that is run entirely on a blockchain, so no central entity owns your data. We use Ethereum smart contracts and IPFS to store data in a distributed way."}
+    -#:javascript
+    -#  const translations = #{ui_translations(:front)};
+    -#:javascript
+    -#  I18n = {
+    -#    prefix: '#{I18n.locale == I18n.default_locale ? "" : "\#{I18n.locale}/"}',
+      -#  locale: '#{I18n.locale}',
+      -#  availableLocales: #{raw(I18n.avaiable_locales.map {|loc| loc.to_s})}
+    -#  }
+    = yield(:head)
+    = analytics_init if Rails.env.production?
+
+  %body.pb-3
+    :javascript
+      window.contractAddress = "0x3c3607c2435078f15e14f0190653b5e172d8d1ca";
+      window.ipfsGatewayAddress = "#{IpfsServer.gateway_address}";
+      window.currentAccount = null;
+      window.currentAccountAddress = null;
+      window.chainID = parseInt("#{ENV['CHAIN_ID'] || 3}");
+      window.ETH_USD = parseFloat("#{eth_usd}");
+    - if current_account
+      :javascript
+        window.currentAccountAddress = "#{current_account.hash_address}";
+        window.currentAccountEmail = "#{current_account.email}";
+        window.currentAccount = #{raw render partial: 'accounts/show.json.jbuilder', locals: { account: current_account }};
+    %nav.navbar.navbar-expand-lg.navbar-light.bg-light
+      %nav.navbar.navbar-expand-lg.bg-rose
+        .container
+          .navbar-translate
+            %a.navbar-brand{:href => "/"} BloBlo
+            %button.navbar-toggler{"aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-toggle" => "collapse", :type => "button"}
+              %span.sr-only Toggle navigation
+              %span.navbar-toggler-icon
+          .collapse.navbar-collapse
+            %ul.navbar-nav
+              %li.nav-item.active
+                %a.nav-link{href: all_path} Public_Post
+              %li.nav-item.dropdown
+                %a.nav-link.dropdown-toggle{href: 'javascript:;', id: 'nav-about-dropdown', role: :button, data: { toggle: 'dropdown' }, aria: { haspopup: "true", expanded: "false" }} About
+                .dropdown-menu.dropdown-menu-left{aria: { labelledby: 'nav-about-dropdown' }}
+                  %a.dropdown-iteam{href: welcome_path} Welcome_BloBlo
+                  .dropdown-divider
+                  %a.dropdown-iteam{href: "#"} FAQ
+            %ul.navbar-nav.mr-3
+              %li.nav-itemss
+                %span.nav-link= "$#{eth_usd} ETH/USD"
+            %form.form-inline.ml-auto.my-2.my-lg-0{action: all_path, method: :get}
+              .form-group
+                %input.form-control.mr-sm-2{"aria-label" => "Search",:placeholder => "Search", name: :query}/
+                %button.btn.btn-white.btn-raised.btn-fab.btn-round.my-2.my-sm-0{:type => "submit"}
+                  %i.fa.fa-search
+              %ul.navbar-nav.ml-auto
+               
+                - if current_account
+                  %li.dropdown.nav-item
+                    %a.nav-link.dropdown-toggle{href: 'javascript:;', id: 'nav-user-dropdown',role: :button, data: {toggle: 'dropdown'}, aria: { haspopup: "true", expanded: "false"}}
+                      .profile-photo-small
+                        =image_tag current_account_avatar(size: :thumb),size: '25x25', class: "rounded img-fluid border border-light"
+                        - if current_account.username.present?
+                          = current_account.username
+                        - else
+                          = short_address( current_account.hash_address )
+                    .dropdown-menu.dropdown-menu-right{ aria: { labelledby: 'nav-user-dropdown' }}
+                      %h6.dropdown-header 
+                      %a.dropdown-item{href: new_message_path} 
+                        %i.fa.fa-address-book &nbsp;&nbsp;Write an Article
+                      %a.dropdown-item{href: edit_account_path(current_account.username || current_account.hash_address)} 
+                        %i.fa.fa-user &nbsp;&nbsp;Edit Profile
+                      %a.dropdown-item{href: account_path(current_account.username || current_account.hash_address)} 
+                        %i.fa.fa-edit &nbsp;&nbsp;View Your Timeline
+                      %a.dropdown-item{href: logout_path,data: {method: :delete}} 
+                        %i.fa.fa-sign-out  &nbsp;&nbsp;Logout
+                - else
+                  %li.nav-item
+                    %a.nav-link{href: login_path} Login
+
+    = content_for :hero
+    .mt-3{class: (content_for?(:container_fluid) ? 'container-fluid' : 'container')}
+      = render 'layouts/messages'
+      = yield
+
+  .space6
+  .space6

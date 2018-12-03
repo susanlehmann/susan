@@ -1,0 +1,25 @@
+%p
+  Hello
+  == @#{@account.username},
+
+%p
+  - if @message.account
+    = link_to "@#{@message.account.username}", account_url(@message.account.username)
+  - else
+    Someone
+  mentioned you in a message on 
+  = succeed "!" do
+    = link_to "BloBlo", root_url
+
+%p
+  Here's the message:
+
+%p= @message.body
+
+%p
+  = link_to "Click here", message_url(@message)
+  to join the conversation.
+
+%p
+  BloBlo is a distributed social network, built on blockchain technology. You're receiving this email because you signed up
+  for BloBlo, and someone mentioned you.

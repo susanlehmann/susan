@@ -1,0 +1,29 @@
+.row
+  .col-2.d-none.d-md-block
+  .col-md-8.col-xs-12
+    .row
+      .col-2
+        - avatar = @account.avatar_url || default_avatar
+        -# = image_tag(avatar, class: '')
+        %img.rounded-circle.img-fluid{src: avatar, title: @account.username}
+      .col-8
+        .display-4= @account.display_name
+        %h4= '@' + @account.username
+        %p.text-truncate= link_to "View Full Profile", @account.federated_id, target: :_blank
+      .col-md-2.col-xs-12.mb-3
+        - if current_account
+          - if @follow
+            = link_to 'Unfollow', federated_follow_path(@follow), method: :delete, class: 'btn btn-warning'
+          - else
+            = link_to 'Follow', federated_follows_path(to_account_id: @account.id), method: :post, class: 'btn btn-primary'
+          
+    %p
+      = '@' + @account.username
+      is part of the fediverse! Simply hit the 'follow' button, and their
+      posts will show up in your timeline.
+
+    %p.mt-3
+      Once you start following them, there posts will show up on the federated timeline on your homepage.
+
+    -# = debug @account.object_data
+    -# = debug @account
