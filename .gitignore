@@ -36,4 +36,6 @@
 
 /ganache-data/*
 
-/bin/push.sh
+/bin/push.sh/public/packs
+/public/packs-test
+/node_modules

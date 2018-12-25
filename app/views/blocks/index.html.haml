@@ -1,21 +1,21 @@
 .row
   .col-12
-    %h1.mb-3 Recent blocks on the BloBlo blockchain:
+    %h1.mb-3 = t("notife2")
 
     %table.table.table-hover
       %thead.thead-light
         %tr.row
-          %th.col Number
-          %th.col-2 Hash
-          %th.col-2 Miner
-          %th.col-1 Age
-          %th.col.text-right Gas Limit
-          %th.col.text-right Gas Used
-          %th.col.text-right Difficulty
+          %th.col = t("num")
+          %th.col-2 = t("hash")
+          %th.col-2 = t("miner")
+          %th.col-1 = t("age")
+          %th.col.text-right = t("gas_limit")
+          %th.col.text-right = t("gas_used")
+          %th.col.text-right = t("diff")
       %tbody
         - @blocks.each do |block|
           %tr.row
-            %td.col.small= link_to block.number, block
+            %td.col.small= link_to block.number, = t("block")
             %td.text-truncate.col-2{title: block.hash_address}
               %small= short_address(block.hash_address, length: 15)
             %td.text-truncate.col-2{title: block.miner}

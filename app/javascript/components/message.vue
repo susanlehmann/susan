@@ -5,7 +5,7 @@
     b-dropdown-item(:href="'/transactions/'+messageData.tx_id", v-if="messageData.tx_id") View Transaction
     b-dropdown-item(:href="'/messages/'+messageData.id") Details
     b-dropdown-item(:href="'/messages/'+messageData.id+'/edit'", v-if="messageOwnedBycurrentAccount()") Edit
-    b-dropdown-item(href="javascript:;", v-if="messageOwnedBycurrentAccount()", @click="hideMessage") Hide
+    b-dropdown-item(href="javascript:;", v-if="messageOwnedBycurrentAccount()", @click="hideMessage") {{ $t('hide') }}
   .card-header
     .row
       .col-2
@@ -22,15 +22,15 @@
 
       div(v-if="messageData.reply_to")
         mini-message(:message="messageData.reply_to")
-          | Replying to a message from {{ messageData.reply_to.account.username_or_address }}
+          | {{ $t('reply_from')}} + {{ messageData.reply_to.account.username_or_address }}
 
       div(v-if="messageData.repost")
         mini-message(:message="messageData.repost")
-          | Reposting a message from {{ messageData.repost.account.username_or_address }}
+          | {{ $t('repost_from') }} {{ messageData.repost.account.username_or_address }}
 
       div(v-if="messageData.tip")
         mini-message(:message="messageData.tip.to_message")
-          | Tipping ${{ tipAmount(messageData.tip.value) }} to {{ messageData.tip.to_message.account.username_or_address }}
+          | {{ $t('tipping') }} + ${{ tipAmount(messageData.tip.value) }} to {{ messageData.tip.to_message.account.username_or_address }}
 
 
       div.mt-2.onebox-container(v-if="messageData.onebox", v-html="messageData.onebox")
@@ -67,27 +67,28 @@
         b-modal(:ref="'reply-modal-'+messageData.id", title="Reply", @ok="submitReply", ok-title="Reply")
           p
             small
-              strong Original Message:
+              strong {{ $t('original_message') }}:
             br
             {{ messageData.body }}
           .mt-2
           textarea.form-control(placeholder="Type your response", v-model="replyBody")
           p.small
-            span.text-muted  Max 280 characters.
+            span.text-muted  {{ $t('max_character') }}
             span(v-if="replyBody.length > 0", v-bind:class="{ 'text-muted': (replyBody.length <= 280), 'text-danger': (replyBody.length > 280) }")
-              |  Currently {{ replyBody.length }} {{ replyBody.length === 0 ? 'character' : 'characters' }}.
+              |  {{ $t('current') }} {{ replyBody.length }} {{ replyBody.length === 0 ? 'character' : 'characters' }}.
 
         b-modal(ref="confirmHideModal", title="Are you sure?", @ok="submitHide", ok-title="Hide")
           p
-            | Because BloBlo is built on top of a public blockchain, no one can ever permanently 'delete' a record.
-            |  However, you can mark your message as hidden, which will prevent it from being displayed publicly.
+            | {{ $t('bloblo_noti1')}}
+            |  {{ $t('bloblo_noti2')}}
 
-          p To confirm that you want to hide this message, click "Hide".
+          p {{ $t('confirmation_hide')}}
       
       send-tip-modal(ref="sendTip",
                       :account="messageData.account",
                       :message="messageData"
                       @sent="handleTipResponse")
+
 </template>
 
 <script>
@@ -136,13 +137,13 @@ export default {
           dataType: 'json'
         });
         batchEvents.triggerNewBatch();
-        this.alertSuccess("Your favorite has been created");
+        this.alertSuccess(this.$t('favorite_create'));
         messageData.is_favorited = true;
         messageData.favorites_count += 1;
         messageData.is_loading = false;
       } catch (error) {
         messageData.is_loading = false;
-        this.alertError("Sorry, there was an error when uploading your favorite to IPFS.");
+        this.alertError(this.$t('error_upload_favorite_ipfs'));
       }
     },
     async repost() {
@@ -165,11 +166,11 @@ export default {
         messageData.is_loading = false;
 
         this.$emit('repost', repost);
-        this.alertSuccess("Your repost has been created");
+        this.alertSuccess(this.$t('repost_create'));
       } catch (error) {
         console.log(error);
         messageData.is_loading = false;
-        this.alertError("Sorry, there was an error when uploading your repost to IPFS.");
+        this.alertError(this.$t('error_upload_repost_ipfs'));
       }
     },
     async reply() {
@@ -201,13 +202,13 @@ export default {
         });
         console.log(reply);
         batchEvents.triggerNewBatch();
-        this.alertSuccess("Your reply has been created");
+        this.alertSuccess(this.$t('reply_create'));
         messageData.is_replied = true;
         messageData.reply_count += 1;
         this.$emit('reply', reply);
       } catch (error) {
         console.log(error);
-        this.alertError("Sorry, there was an error when uploading your reply to IPFS.");
+        this.alertError(this.$t('error_upload_reply_ipfs'));
       }
       messageData.is_loading = false;
     },
@@ -244,10 +245,10 @@ export default {
         });
         this.messageData = message;
         batchEvents.triggerNewBatch();
-        this.alertSuccess("Your message has been hidden.");
+        this.alertSuccess(this.$t('hide_message'));
       } catch (error) {
         console.log(error);
-        this.alertError('Sorry, an error occurred while trying to hide this message.');
+        this.alertError(this.$t('error_hide_message'));
       }
       messageData.is_loading = false;
     },

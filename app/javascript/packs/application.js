@@ -12,11 +12,13 @@ import Vue from 'vue';
 
 import App from '../app.vue';
 
+import VueI18n from 'vue-i18n';
+
 document.addEventListener('DOMContentLoaded', () => {
-  const json = document.getElementById('js-messages').getAttribute('data');
-  const data = JSON.parse(json);
-  console.log(data);
-  const app = new Vue({
-    render: h => h(App, { props: { _messages: data.messages, currentUser: data.current_user }})
+ const json = document.getElementById('js-messages').getAttribute('data');
+ const data = JSON.parse(json);
+ console.log(data);
+ const app = new Vue({
+   render: h => h( App, { props: { _messages: data.messages, currentUser: data.current_user }})
   }).$mount('#js-messages');
 })

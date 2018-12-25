@@ -37,6 +37,6 @@ class Federated::AccountsController < ApplicationController
   end
 
   def redirect_home
-    redirect_to root_path, alert: "Sorry, we couldn't find that user."
+    redirect_to root_path, alert: t("find_user")
   end
 end

@@ -3,26 +3,26 @@ div
   alerts(ref="alerts")
   b-modal(ref="modal", title="Post to Ethereum", :ok-disabled="loading || metamaskPending", 
           ok-title="Post on Smart Contract", @ok="postOnEthereum", @cancel="cancel")
-    h5 Step 1: Upload to IPFS
+    h5 {{ $t('step_upload_ipfs')}}
     div(v-if="loading")
       p
         i.fa.fa-spin.fa-refresh
-        |  In progress
+        |  {{ $t('in_progress') }}
     div(v-else)
       p 
         i.fa.fa-check
-        |  Complete
+        |  {{ $t('complete') }}
       p
-        | IPFS Link:
+        | {{ $t('ipfs_link') }}
         a.mt-1.d-block.text-truncate(:href="ipfsLink", target="_blank") {{ ipfsLink }}
         a.mt-1.d-block.text-truncate(:href="ipfsGatewayLink", target="_blank") {{ ipfsGatewayLink }}
 
     h5 Step 2: Send to Ethereum
     p(v-if="metamaskPending")
-      | You need to confirm this transaction in your browser to continue.
+      | {{ $t('confirm_transaction') }}
     p(v-else)
-      | Click on the button below send this data to Ethereum. It costs a small
-      | amount of gas, which is paid with Ethereum.
+      | {{ $t('confirm_transaction1') }}
+      | {{ $t('confirm_transaction2') }}
 
 </template>
 
@@ -78,11 +78,11 @@ export default {
           this.modelData.tx_id = response.transaction.id;
         }
         let link = `<a href="${response.transaction.url}">View Transaction</a>`;
-        this.alertSuccess("All set - our servers have recorded your transaction.", { text: link });
+        this.alertSuccess(this.$t('recored_transaction'), { text: link });
         batchEvents.triggerNewBatch();
       } catch (error) {
         console.log(error);
-        this.alertError("Your transaction was saved on Ethereum, but there was an error updating our servers with that info.");
+        this.alertError(this.$t('error_update_transaction'));
       }
     },
     async sendTransaction() {
@@ -91,7 +91,7 @@ export default {
         const result = await contract.newBatch.sendTransaction(this.ipfsBytes32, this.transactionOptions);
         console.log(result);
         await this.attachTransaction(result);
-        this.alertSuccess("Awesome! Your batch has been sent to Ethereum.");
+        this.alertSuccess(this.$t('success_batch'));
         this.hide();
         this.$emit('batchSuccess');
       } catch (error) {
@@ -116,10 +116,10 @@ export default {
 
         batchEvents.triggerNewBatch();
         this.loading = false;
-        this.alertSuccess('Your batch has been canceled.');
+        this.alertSuccess(this.$t('cancel_batch'));
       } catch (error) {
         console.log(error);
-        this.alertError("Sorry, there was an error when canceling your transaction");
+        this.alertError(this.$t('error_batch_so_cancel'));
       }
       this.hide();
     }

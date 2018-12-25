@@ -7,10 +7,10 @@
           h3 @{{ account.username }}
           i.fa.fa-globe.mr-1
           {{ account.location }}<br>
-          strong Address:
+          strong {{ $t('address') }}:
           .mt-0
           span.tiny {{ shortAddress }}<br>
-          strong Fediverse Handle:
+          strong {{ $t('fediver_handle') }}:
           .mt-0
           span.tiny {{ fediverseHandle }}
 
@@ -25,10 +25,10 @@
         ul
           li
             a 2
-            span Followers
+            span {{ $t('followers') }}
           li
             a 4
-            span Following
+            span {{ $t('following') }}
     follow-button(:account="account")
 </template>
 

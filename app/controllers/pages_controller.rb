@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   def upload_avatar
     if params[:file].size > 2.megabytes
       size = helpers.number_to_human_size(params[:file].size)
-      message = "Sorry, profile pictures must be less than 2 MB. The file you uploaded was #{size}."
+      message = t("size_image") + ' ' + "#{size}."
       render json: { message: message }, status: 422
     else
       ipfs_hash = IpfsServer.add(params[:file].tempfile).hashcode

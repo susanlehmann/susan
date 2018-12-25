@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   #scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
+ # localized do
     get 'auth/login' => 'authentication#login', as: :login
     get 'auth/sign' => 'authentication#sign', as: :auth_sign
     delete 'auth/logout' => 'authentication#logout', as: :logout
 
     root to: 'pages#home', constraints: lambda { |request| request.session['account_id'].present? }
-    root to: 'pages#welcome'
+    root to: 'authentication#login'
 
     get '/all' => 'pages#home', as: :all
     get '/welcome' => 'pages#welcome', as: :welcome

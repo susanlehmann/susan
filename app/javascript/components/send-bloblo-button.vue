@@ -3,7 +3,7 @@ div(v-if="visible()")
   notifications(group="send-bloblo", :duration="-1")
   small
     a(href="javascript:;", @click="openSendModal()")
-      | Send BLOBLO to @{{account.username}}
+      | {{ $t('sent_bloblo_to') }} + ' ' + @{{account.username}}
 
   send-bloblo-modal(ref="modal",
                   :account="account"

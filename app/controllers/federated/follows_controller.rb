@@ -7,7 +7,7 @@ class Federated::FollowsController < ApplicationController
       from_account_id: current_account.federated_account.id,
       to_account_id: @account.id,
     )
-    redirect_to federated_account_path(@account.id), notice: "You've followed this account."
+    redirect_to federated_account_path(@account.id), notice: t("federated_account_follow")
   end
 
   def destroy
@@ -15,6 +15,6 @@ class Federated::FollowsController < ApplicationController
     authorize! :destroy, @follow
     @follow.destroy
 
-    redirect_to federated_account_path(@follow.to_account_id), notice: "You've unfollowed this account."
+    redirect_to federated_account_path(@follow.to_account_id), notice: t("federated_account_unfollow")
   end
 end

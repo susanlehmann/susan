@@ -22,7 +22,9 @@
 $lightPurple: #778beb;
 $lightPeach: #f3a683;
 $darkPurple: #574b90;
-
+.backgrap{
+  background-image: image-url("bg-01.jpg");
+}
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 $font-family-base: 'Roboto Mono', SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
 @import "bootstrap";

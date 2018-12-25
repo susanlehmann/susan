@@ -1,2 +1,190 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
 jp:
-  hello: "hello"
+  hello: "Hello world"
+  find_user: "ユーザが見つかりません。"
+  federated_account_follow: "このアカウントをフォローしました。"
+  federated_account_unfollow: "このアカウントをアンフォローしました"
+  update_setting: "設定を更新しました。"
+  not_find_account: "このIDのアカウントを見つけられませんでした。: "
+  login_first: "ページを見るにはログインが必要です。"
+  miss_sign: "アドレスと署名が一致しません。"
+  noti_logout: "ログアウトしました。"
+  size_image: "Sorry, profile pictures must be less than 2 MB. The file you uploaded was "
+  contract_bloblo: "Bloblo スマートコントラクト"
+  notife: "It looks like you haven't linked up any accounts yet."
+  add_acc: "Add an account"
+  edit: Edit
+  userna: Username
+  add: Address
+  actio: Action
+  u_acc: Your Accounts
+  set: Settings
+  notic: Notifications
+  txt1: This is only used to send you notifications for new messages.
+  txt2: Your email will never be posted publicly or on the blockchain.
+  num: Number
+  hash: Hash
+  miner: Miner
+  age: Age
+  gas_limit: Gas Limit
+  gas_used: Gas Used
+  diff: Difficulty
+  block: block
+  notife2: "Recent blocks on the BloBlo blockchain:"
+  timestamp: Timestamp
+  nonce: Nonce
+  notife3: is part of the fediverse! Simply hit the 'follow' button, and their posts will show up in your timeline.
+  notife4: Once you start following them, there posts will show up on the federated timeline on your homepage.
+  write_article: "記事を書く"
+  edit_profile: "プロファイルを編集"
+  view_timeline: "タイムラインを見る"
+  logout: "ログアウト"
+  vue:
+    front:
+      following: "フォローする"
+      noti_update_info: "あなたのアカウントは更新されました。"
+      error_update: "あなたの更新でエラーが発生しました。"
+      error_update_avatar: "アバターのアップロードでエラーが発生しました。"
+      success_upload_image: "新しい画像は正しくアップロードされました。"
+      update: "更新"
+      noti_email_field: "あなたの電子メールアドレスはあなたに通知をくるためだけに使われます。ブロックチェーンにポストしたり共有されることはありません。"
+      email_address: "電子メールアドレス"
+      location: "場所"
+      bio: "経歴"
+      display_name: "表示名"
+      username: "ユーザー名"
+      account_avatar: "現在のアバターのままにするには、なにも入力しないでください。"
+      update_profile: "プロファイルを更新"
+      alert_login_first: "あなたのアカウントはブロックチェーンで設定されていません。先にプロファイルを設定してください。"
+      avatar_label: Avatar
+      fetching_batch: "バッチアイテムの取得"
+      noti1: "アイテムはblobloサーバーにアップロードされましたが、まだブロックチェーンに保存されていません。"
+      text1: "Ethereumネットワークに保存することで、あなたのデータは完全にデセンタライズドされ。"
+      text2: "BloBloデータを使用する他のアプリで使用できるようになります。"
+      your_pending_items: "保留中のアイテムは:"
+      click_continue: "'Continue'をクリックしてEthereumのトランザクションを作成してください。"
+      pending_batch_items: "バッチアイテムの保留"
+      ethereum_network: "間違ったEthereumネットワークに接続しているようです。"
+      current_network_id: "あなたのネットワークIDは: "
+      expected: "期待値:"
+      connected_network1: "ネットワークに接続していることを確認してください。"
+      connected_network2: "接続されていないとblobloネットワークでスマートコントラクト"
+      connected_network3: "を実行できません。"
+      address: "住所"
+      fediver_handle: Fediverse Handle
+      followers: "フォロワー"
+      update_your_message: Update your message
+      write_something: "ブロックチェーンに書き込みます。"
+      go_back: Go back to this message
+      view_message: View Message
+      successfully_updated: "あなたのメッセージは正常に更新されました。"
+      errors_update_message: "すいません。このメッセージを更新します。"
+      federated_timeline: Your federated timeline
+      hang_on_federated_timeline: "統合されたタイムラインを取得するまでしばらくお待ち下さい。"
+      not_follow_federated_account: "まだ統合タイムラインをフォローしていません。"
+      looking_federated_account: Looking for a federated account to follow? Check out
+      looking_continue: Looking for this continue
+      fetching_federated_timeline: "統合タイムラインを読み込み中にエラーが発生しました。"
+      loading: "読み込み中..."
+      follow: "フォロー"
+      unfollow: "アンフォロー"
+      your_followed: You've followed
+      error_follow: "Sorry, there was an error when creating this follow."
+      your_unfollow: You've unfollowed
+      error_unfollow: "Sorry, there was an error when creating this follow."
+      login_ethereum: Login BloBlo
+      login_firt_dapp: BloBlo
+      sent_request_sign: "メッセージへの署名を要求しました。- 続けるには確認してください。"
+      logging_you: "ログイン中..."
+      sign_in: Sign In
+      metamask_locked: "MetaMaskがロックされています。ログインのためにMetaMaskにパスワードを入力してください。"
+      use_web3: "安全にEthereumブロックチェーンを使用するために、web3互換ブラウザをご利用ください。"
+      mobile_app: これらはあなたが使用できるいくつかのモバイルアプリです。
+      noti_metamask1: "デスクトップ環境ではMetaMaskのブラウザ機能拡張を推奨します。"
+      noti_metamask2: "Matamaskインストール後、このページをサインインのためリロードしてください。"
+      unable_signature: "署名を検証できませんでした。"
+      unable_signature1: "署名を取得できません。"    
+      published: "公開済み"
+      untitled: "タイトルなし"
+      replies: "返信"
+      tips: Tips
+      from: from
+      hide: Hide
+      reply_from: "からのメッセージに返信中"
+      repost_from: "のメッセージを再ポスト"
+      tipping: "チップ"
+      original_message: 元のメッセージ
+      max_character: Max 280 characters.
+      current: Currently
+      bloblo_noti1: "blobloはブロックチェーンの上に構築されているため、誰もレコードを削除できません。"
+      bloblo_noti2: "しかし、あなたはメッセージを非表示にできます。このことで公に表示されることを防ぐことができます。"
+      confirmation_hide: "'Hide'をクリックして、このメッセージを非表示にすることを確認してください。"
+      favorite_create: "お気に入りが作成されました。"
+      error_upload_favorite_ipfs: "お気に入りをIPFSにアップロード中にエラーが発生しました。"
+      repost_create: "再ポストが作成されました。"
+      error_upload_repost_ipfs: "再ポストをIPFSにアップロード中にエラーが発生しました。"
+      reply_create: "返信が作成されました。"
+      error_upload_reply_ipfs: "返信をIPFSにアップロード中にエラーが発生しました。"
+      hide_message: "メッセージは非表示になりました。"
+      error_hide_message: '非常時を処理中にエラーが発生しました。'
+      no_message_show: "表示するメッセージがありません。"
+      loading_more_message: メッセージを読み込み中
+      sent_bloblo_to: Send BLOBLO to
+      step_upload_ipfs: "Step 1: IPFSへのアップロード"
+      in_progress: "処理中"
+      complete: "完了"
+      ipfs_link: "IPFSリンク:"
+      confirm_transaction: "つづけるにはこのトランザクションをブラウザで確認してください。"
+      confirm_transaction1: "この下のボタンを押してEthereumにデータを送信してください。Ethereumに支払う少額のgasが必要です。"
+      confirm_transaction2: "Ethereumに支払う少額のgasが必要です。"
+      recored_transaction: "準備完了 - サーバーはトランザクションを保存しました。"
+      error_update_transaction: "トランザクションはEthereumに保存されました。しかし、サーバの更新に失敗しました。"
+      success_batch: "Awesome! Your batch has been sent to Ethereum."
+      cancel_batch: 'Your batch has been canceled.'
+      error_batch_so_cancel: "トランザクションのキャンセルでエラーが発生しました。"
+      timeline: タイムライン
+      thread_following: Tスレッドをフォロー
+      welcome_bloblo: BloBloへようこそ!
+      bloblo: BLOckchain micro BLOg.
+      placeholder_1: "For @ mentions"
+      placeholder_2: "What should we call you?"
+      placeholder_3: "あなたのストーリーを教えてください。"
+      placeholder_4: "i.e. 'Mars'"
+      optinal: 任意
+      max_size_image: Max 2 MB.
+      wrong_network: Uh Oh! Wrong Network.
+      readmore: Read More
+      step2_sent_ethereum: "Step 2: Send to Ethereum"
+      post_ethereum: Post to Ethereum
+      view_transaction: "トランザクション表示"
+      

@@ -4,28 +4,28 @@ div.batch__container(v-if="loading || count > 0")
     .batch-desktop(@click="showModal")
       span(v-if="loading")
         i.fa.fa-spinner.fa-pulse
-        |  fetching batch items
+        |  {{ $t('fetching_batch') }}
       span(v-else)
         {{ message }}
   .d-block.d-xs-block.d-md-none.d-lg-none.batch-mobile__container
     .batch-mobile(@click="showModal")
       span(v-if="loading")
         i.fa.fa-spinner.fa-pulse
-        |  fetching batch items
+        |  {{ $t('fetching_batch') }}
       span(v-else)
         {{ message }}
-  b-modal(ref="modal", title="Pending Batch Items", :ok-disabled="loadingBatch", ok-title="Continue", @ok="upload")
+  b-modal(ref="modal", v-show:title="$t('pending_batch_items')", :ok-disabled="loadingBatch", ok-title="Continue", @ok="upload")
     h5 {{ message }}
-    p You've uploaded items to the BloBlo server, but you haven't saved them on the blockchain yet.
+    p {{ $t('noti1') }}
     p 
-      | Saving them to Ethereum ensures that your data is fully decentralized
-      | and available on other apps that use BloBlo data.
+      | {{ $t('text1') }}
+      | {{ $t('text2') }}
     p
-      | Your pending items are:
+      | {{ $t('your_pending_items') }}
     ul
       li(v-for="(batchItems, key) in groupedItems")
         {{ itemMessage(key, batchItems) }}
-    p Click 'Continue' to create an Ethereum transaction.
+    p {{ $t('click_continue') }}
   upload-wizard(ref="uploadWizard", model="batch", @success="batchSent")
 </template>
 

@@ -31,7 +31,7 @@ class AccountsController < ApplicationController
   def update_settings
     @account = current_account
     @account.update(params.require(:account).permit(:email))
-    redirect_to settings_accounts_path, notice: "Your settings have been updated successfully."
+    redirect_to settings_accounts_path, notice: t("update_setting")
   end
 
   private
@@ -48,7 +48,7 @@ class AccountsController < ApplicationController
       @account = Account.find_by(id: id) || Account.find_by(username: id)
     end
     if @account.blank?
-      raise ActiveRecord::RecordNotFound.new("Couldn't find account with id: #{id}")
+      raise ActiveRecord::RecordNotFound.new(t("not_find_account") + ' ' + "#{id}")
     end
   end
 

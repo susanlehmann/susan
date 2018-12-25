@@ -4,6 +4,8 @@ import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import VueObserveVisibility from 'vue-observe-visibility';
 import {Tabs, Tab} from 'vue-tabs-component';
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 
 Vue.use(VueObserveVisibility);
 Vue.use(BootstrapVue);

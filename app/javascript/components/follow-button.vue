@@ -3,11 +3,11 @@ div(v-if="visible()")
   b-button(:block="true", @click="toggleFollow()", :variant="variant()")
     span(v-if="isLoading")
       i.fa.fa-spin.fa-spinner.mr-1
-      | Loading...
+      | {{ $t('loading') }}
     span(v-if="!isLoading && !follow")
-      | Follow
+      | {{ $t('follow') }}
     span(v-if="!isLoading && follow")
-      | Unfollow
+      | {{ $t('unfollow') }}
   alerts(ref="alerts")
 </template>
 
@@ -47,9 +47,9 @@ export default {
         });
         batchEvents.triggerNewBatch();
         this.follow = follow;
-        this.alertSuccess(`You've followed @${this.account.username}`);
+        this.alertSuccess(this.$t('your_followed') + ' ' + `@${this.account.username}`);
       } catch (error) {
-        this.alertError("Sorry, there was an error when creating this follow.");
+        this.alertError(this.$t('error_follow'));
       }
     },
     async unfollow() {
@@ -63,10 +63,10 @@ export default {
           dataType: 'json'
         });
         batchEvents.triggerNewBatch();
-        this.alertSuccess(`You've unfollowed @${this.account.username}`);
+        this.alertSuccess(this.$t('your_unfollow') + ' ' + `@${this.account.username}`);
         this.follow = null;
       } catch (error) {
-        this.alertError("Sorry, there was an error when creating this follow.");
+        this.alertError(this.$t('error_unfollow'));
       }
     },
     visible() {

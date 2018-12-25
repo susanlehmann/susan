@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user!
     if current_account.blank?
-      redirect_to login_path, notice: "You need to login first to visit that page."
+      redirect_to login_path, notice: t("login_first")
     end
   end
 

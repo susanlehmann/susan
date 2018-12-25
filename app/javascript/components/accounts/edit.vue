@@ -1,51 +1,72 @@
-<template lang="jade">
-div
-  common
-  alerts(ref="alerts")
-  .row(v-if="!account.ipfs_hash")
-    .col-3.d-none.d-md-block
-    .col-md-6.col-xs-12
-      .alert.alert-danger.mt-3.mb-3
-        | You haven't setup your account on the blockchain yet. Fill out your profile first!
+<template>
+<div>
+  <common></common>
+  <alerts ref="alerts"></alerts>
+  <div class="row" v-if="!account.ipfs_hash">
+    <div class="col-3 d-none d-md-block"></div>
+    <div class="col-md-6 col-xs-12">
+      <div class="alert alert-danger mt-3 mb-3">{{ $t('alert_login_first') }}</div>
+    </div>
+  </div>
+  <div class="limiter">
+    <div class="container-login100">
+      <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+        <form class="login100-form validate-form">
+          <span class="login100-form-title p-b-49">
+            {{ $t('update_profile') }}
+          </span>
 
-  .row
-    .col-3.d-none.d-md-block
-    .col-md-6.col-xs-12
-      .card
-        h4.card-header Update your profile
-        .card-body
-          label Avatar
-          p.text-muted.small 
-            | Max 2 MB.
-            span(v-if="account.avatar && account.avatar.medium")  Leave blank to keep your current avatar.
-          vue-dropzone(ref="dropzone", id="dropzone", :options="dropzoneOptions", @vdropzone-success="uploadSuccess", @vdropzone-error="uploadError")
-          .wrap-input100.validate-input
-            label(for="username", class="label-input100") Username
-            input.form-control(type="text", v-model="username", name="username", placeholder="For @ mentions", class="input100")
-          .wrap-input100.validate-input.m-b-23
-            label(for="display_name", class="label-input100") 
-              | Display Name
-              span.small.text-muted  Optional
-            input.form-control(type="text", v-model="display_name", name="display_name", placeholder="What should we call you?", class="input100")
-          .wrap-input100.validate-input.m-b-23
-            label(for="bio", class="label-input100") 
-              | Bio
-              span.small.text-muted  Optional
-            textarea.form-control(v-model="bio", name="bio", placeholder="Tell us your story", class="input100")
-          .wrap-input100.validate-input.m-b-23
-            label(for="location", class="label-input100") 
-              | Location
-              span.small.text-muted  Optional
-            input.form-control(type="text", v-model="location", name="location", placeholder="i.e. 'Mars'", class="input100")
+          <div class="wrap-input100 validate-input m-b-23" >
+            <span class="label-input100" for="username">{{ $t('username') }}</span>
+            <input class="input100" type="text" v-model="username" name="username" v-bind:placeholder="$t('placeholder_1')"/>
+          </div>
 
-          .wrap-input100.validate-input.m-b-23
-            label(for="email", class="label-input100") 
-              | Email Address
-              span.small.text-muted  Optional
-            input.form-control(type="email", v-model="email", name="email", class="input100")
-            span.small.text-muted Your email is only used to send you notifications. It is never shared or posted on the blockchain.
+          <div class="wrap-input100 validate-input">
+            <span class="label-input100"for="display_name">{{ $t('display_name') }}
+              <span class="small text-muted"> Optional</span>
+            </span>
+            <input class="input100" type="text" v-model="display_name" name="display_name" v-bind:placeholder="$t('placeholder_2')"/>
+          </div>
           
-          b-button(:block="true", variant="primary", size="lg", @click="sendUpdate") Update
+          <div class="wrap-input100 validate-input m-b-23">
+            <span class="label-input100"for="bio">{{ $t('bio') }}
+              <span class="small text-muted"> Optional</span>
+            </span>
+            <textarea class="input100" v-model="bio" name="bio" v-bind:placeholder="$t('placeholder_3')"></textarea>
+          </div>
+
+          <div class="wrap-input100 validate-input m-b-23">
+            <span class="label-input100"for="location">{{ $t('location') }}
+              <span class="small text-muted"> Optional</span>
+            </span>
+            <input class="input100" type="text" v-model="location" name="location" v-bind:placeholder="$t('placeholder_4')"/>
+          </div>
+
+          <div class="wrap-input100 validate-input m-b-23">
+            <span class="label-input100"for="email">{{ $t('email_address') }}
+              <span class="small text-muted"> Optional</span>
+            </span>
+            <input class="input100" type="email" v-model="email" name="email"/>
+            <span class="small text-muted">{{ $t('noti_email_field') }}</span>
+          </div>
+
+          <div class="wrap-input100 validate-input m-b-23" >
+            <span class="label-input100">{{ $t('avatar_label') }}</span>
+            <p class="text-muted small">Max 2 MB.<span v-if="account.avatar &amp;&amp; account.avatar.medium"> {{ $t('account_avatar') }}</span></p>
+            <vue-dropzone ref="dropzone" id="dropzone" :options="dropzoneOptions" @vdropzone-success="uploadSuccess" @vdropzone-error="uploadError"></vue-dropzone>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <b-button :block="true" variant="primary" size="lg" @click="sendUpdate">{{ $t('update') }}</b-button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
@@ -85,11 +106,11 @@ export default {
       while (dropzone.files.length > 1) {
         dropzone.removeFile(dropzone.files[0]);
       }
-      this.alertSuccess("Successfully uploaded a new image.");
+      this.alertSuccess(this.$t('success_upload_image'));
     },
     uploadError(file, data, xhr) {
       console.log(file, data, xhr);
-      let message = "Sorry, there was an error when uploading a new avatar.";
+      let message = this.$t('error_update_avatar');
       try {
         message = JSON.parse(data).message;
       } catch (error) { 
@@ -117,11 +138,11 @@ export default {
           data: { account: data },
         });
         batchEvents.triggerNewBatch();
-        this.alertSuccess("Your account has been updated!");
+        this.alertSuccess(this.$t('noti_update_info'));
         document.location = "/";
       } catch (error) {
         console.log(error);
-        let message = 'There was an error with your update';
+        let message = this.$t('error_update');
         if (error.responseJSON && error.responseJSON.errors) {
           message += `: ${error.responseJSON.errors[0]}`;
         }

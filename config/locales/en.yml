@@ -31,3 +31,163 @@
 
 en:
   hello: "Hello world"
+  find_user: "Sorry, we couldn't find that user."
+  federated_account_follow: "You've followed this account."
+  federated_account_unfollow: "You've unfollowed this account."
+  update_setting: "Your settings have been updated successfully."
+  not_find_account: "Couldn't find account with id: "
+  login_first: "You need to login first to visit that page."
+  miss_sign: "Signature doesn't match address."
+  noti_logout: "You've been logged out successfully."
+  size_image: "Sorry, profile pictures must be less than 2 MB. The file you uploaded was "
+  contract_bloblo: "Bloblo Smart Contract"
+  notife: "It looks like you haven't linked up any accounts yet."
+  add_acc: "Add an account"
+  edit: Edit
+  userna: Username
+  add: Address
+  actio: Action
+  u_acc: Your Accounts
+  set: Settings
+  notic: Notifications
+  txt1: This is only used to send you notifications for new messages.
+  txt2: Your email will never be posted publicly or on the blockchain.
+  num: Number
+  hash: Hash
+  miner: Miner
+  age: Age
+  gas_limit: Gas Limit
+  gas_used: Gas Used
+  diff: Difficulty
+  block: block
+  notife2: "Recent blocks on the BloBlo blockchain:"
+  timestamp: Timestamp
+  nonce: Nonce
+  notife3: is part of the fediverse! Simply hit the 'follow' button, and their posts will show up in your timeline.
+  notife4: Once you start following them, there posts will show up on the federated timeline on your homepage.
+  write_article: Write an Article
+  edit_profile: Edit Profile
+  view_timeline: View Your Timeline
+  logout: Logout
+  vue:
+    front:
+      following: Following
+      noti_update_info: Your account has been updated!
+      error_update: There was an error with your update
+      error_update_avatar: Sorry, there was an error when uploading a new avatar.
+      success_upload_image: Successfully uploaded a new image.
+      update: Update
+      noti_email_field: Your email is only used to send you notifications. It is never shared or posted on the blockchain.
+      email_address: Email Address
+      location: Location
+      bio: Bio
+      display_name: Display Name
+      username: Username
+      account_avatar: Leave blank to keep your current avatar.
+      update_profile: Update your profile
+      alert_login_first: You haven't setup your account on the blockchain yet. Fill out your profile first!
+      avatar_label: Avatar
+      fetching_batch: fetching batch items
+      noti1: You've uploaded items to the BloBlo server, but you haven't saved them on the blockchain yet.
+      text1: Saving them to Ethereum ensures that your data is fully decentralized
+      text2: and available on other apps that use BloBlo data.
+      your_pending_items: "Your pending items are:"
+      click_continue: Click 'Continue' to create an Ethereum transaction.
+      pending_batch_items: Pending Batch Items
+      ethereum_network: It looks like you're connected to the wrong Ethereum network.
+      current_network_id: "Your current Network ID is: "
+      expected: "Expected:"
+      connected_network1: Make sure you're connected to the
+      connected_network2: Network, otherwise you won't be able to
+      connected_network3: interact with the smart contracts on the BloBlo network.
+      address: Address
+      fediver_handle: Fediverse Handle
+      followers: Followers
+      update_your_message: Update your message
+      write_something: Write something on the blockchain
+      go_back: Go back to this message
+      view_message: View Message
+      successfully_updated: "Your message has been successfully updated."
+      errors_update_message: "Sorry, we're to update this message."
+      federated_timeline: Your federated timeline
+      hang_on_federated_timeline: Hang on while we fetch your federated timeline
+      not_follow_federated_account: You aren't following any federated accounts yet!
+      looking_federated_account: Looking for a federated account to follow? Check out
+      looking_continue: Looking for this continue
+      fetching_federated_timeline: "Sorry, there was an error when fetching your federated timeline"
+      loading: Loading...
+      follow: Follow
+      unfollow: Unfollow
+      your_followed: You've followed
+      error_follow: "Sorry, there was an error when creating this follow."
+      your_unfollow: You've unfollowed
+      error_unfollow: "Sorry, there was an error when creating this follow."
+      login_ethereum: Login BloBlo
+      login_firt_dapp: BloBlo
+      sent_request_sign: We sent a request for you to sign a message - please confirm to continue.
+      logging_you: Logging you in...
+      click_sign_in: 
+      click_sign_in1: 
+      sign_in: Sign In
+      metamask_locked: It looks like MetaMask is locked. Enter your password in MetaMask to log in.
+      use_web3: To interact with the Ethereum blockchain securely, you need to use a web3 compatible browser.
+      mobile_app: Here are a few great mobile apps you can use
+      noti_metamask1: On desktop, we recommend using the MetaMask browser extension.
+      noti_metamask2: Once you've installed Metamask, just refresh this page to sign in.
+      unable_signature: Sorry, we were unable to verify your signature.
+      unable_signature1: "We were unable to get your signature."    
+      published: Published
+      untitled: Untitled
+      replies: Replies
+      tips: Tips
+      from: from
+      hide: Hide
+      reply_from: Replying to a message from
+      repost_from: Reposting a message from
+      tipping: Tipping
+      original_message: Original Message
+      max_character: Max 280 characters.
+      current: Currently
+      bloblo_noti1: Because BloBlo is built on top of a public blockchain, no one can ever permanently 'delete' a record.
+      bloblo_noti2: However, you can mark your message as hidden, which will prevent it from being displayed publicly.
+      confirmation_hide: To confirm that you want to hide this message, click "Hide".
+      favorite_create: "Your favorite has been created"
+      error_upload_favorite_ipfs: "Sorry, there was an error when uploading your favorite to IPFS."
+      repost_create: "Your repost has been created"
+      error_upload_repost_ipfs: "Sorry, there was an error when uploading your repost to IPFS."
+      reply_create: "Your reply has been created"
+      error_upload_reply_ipfs: "Sorry, there was an error when uploading your reply to IPFS."
+      hide_message: "Your message has been hidden."
+      error_hide_message: 'Sorry, an error occurred while trying to hide this message.'
+      no_message_show: It looks like there are no messages to show here.
+      loading_more_message: Loading More Messages
+      sent_bloblo_to: Send BLOBLO to
+      step_upload_ipfs: "Step 1: Upload to IPFS"
+      in_progress: In progress
+      complete: Complete
+      ipfs_link: "IPFS Link:"
+      confirm_transaction: "You need to confirm this transaction in your browser to continue."
+      confirm_transaction1: "Click on the button below send this data to Ethereum. It costs a small"
+      confirm_transaction2: "amount of gas, which is paid with Ethereum."
+      recored_transaction: "All set - our servers have recorded your transaction."
+      error_update_transaction: "Your transaction was saved on Ethereum, but there was an error updating our servers with that info."
+      success_batch: "Awesome! Your batch has been sent to Ethereum."
+      cancel_batch: 'Your batch has been canceled.'
+      error_batch_so_cancel: "Sorry, there was an error when canceling your transaction"
+      timeline: Timeline
+      thread_following: Thread following
+      welcome_bloblo: Welcome to BloBlo!
+      bloblo: BLOckchain micro BLOg.
+      placeholder_1: "For @ mentions"
+      placeholder_2: "What should we call you?"
+      placeholder_3: "Tell us your story"
+      placeholder_4: "i.e. 'Mars'"
+      optinal: Optional
+      max_size_image: Max 2 MB.
+      wrong_network: Uh Oh! Wrong Network.
+      readmore: Read More
+      step2_sent_ethereum: "Step 2: Send to Ethereum"
+      post_ethereum: Post to Ethereum
+      view_transaction: View Transaction
+      type_response: Type your response
+      

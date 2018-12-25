@@ -3,14 +3,14 @@ div
   div(v-if="enabled && currentAccount")
     b-modal(ref="modal", title="Uh Oh! Wrong Network.")
       p
-        | It looks like you're connected to the wrong Ethereum network.
+        | {{ $t('ethereum_network') }}
 
       p
-        | Your current Network ID is: {{ currentNetworkId }}. Expected: {{ chainID }}.
+        | {{ $t('current_network_id') }} + {{ currentNetworkId }}.{{ $t('expected') }} + {{ chainID }}.
 
       p.mt-1
-        | Make sure you're connected to the {{ chainName }} Network, otherwise you won't be able to
-        | interact with the smart contracts on the BloBlo network.
+        | {{ $t('connected_network1') }} + {{ chainName }} + {{ $t('connected_network2') }}
+        | {{ $t('connected_network3') }}
 </template>
 
 <script>

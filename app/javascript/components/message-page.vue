@@ -20,13 +20,13 @@ div
                 i.fa.fa-globe.mr-1
                 {{ message.account.location }}
               br
-              | Published {{ moment(message.timestamp).fromNow() }}
+              | {{ $t('published') }} {{ moment(message.timestamp).fromNow() }}
       
         h1.mt-3
           span(v-if="message.title")
             {{ message.title }}
           span(v-else)
-            | Untitled
+            | {{ $t('untitled')}}
         
         .space3
 
@@ -49,7 +49,7 @@ div
           .space
           hr
           .space
-          h3.mb-3 Replies:
+          h3.mb-3 {{ $t('replies') }}:
 
           messages-list(:messages="replies")
 
@@ -57,13 +57,13 @@ div
           .space
           hr
           .space
-          h3.mb-3 Tips:
+          h3.mb-3 {{ $t('tips') }}:
 
           ul(v-for="tip in tips")
             li
               a(:href="'/transactions/'+tip.tx_id")
                 ${{ tipsAmount(tip.value) }} 
-              | from 
+              | {{ $t('from') }} 
               span(v-if="tip.username")
                 a(:href="'/u/'+tip.username")  @{{ tip.username }}
               span(v-else)

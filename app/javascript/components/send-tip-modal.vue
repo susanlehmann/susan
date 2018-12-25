@@ -9,7 +9,7 @@ b-modal(ref="modal", title="Tip ETH", @ok="submitSend", ok-title="Send", :ok-dis
     dd.col-6.text-right 
       span(v-if="loadingBalance") 
         i.fa.fa-spinner.fa-pulse.mr-2
-        | Loading..
+        | {{ $t('loading') }}
       span(v-else-if="balance")
         | Ξ{{ balance.toFixed() }}
     
@@ -28,7 +28,7 @@ b-modal(ref="modal", title="Tip ETH", @ok="submitSend", ok-title="Send", :ok-dis
 
   div(v-else)
     p.text-danger
-      | Sorry, that doesn't seem like a valid number.
+      | {{ $t('valid_number') }}
 
   div(v-if="isNumber() && balance")
     dl.row(v-if="balance")
@@ -39,18 +39,18 @@ b-modal(ref="modal", title="Tip ETH", @ok="submitSend", ok-title="Send", :ok-dis
       dd.col-6.text-right ${{ remainingBalanceUSD.toFixed(2) }}
 
     p.text-danger(v-if="amountTooHigh()")
-      | You cannot send more than you have available in your wallet.
+      | {{ $t('send_more_wallet') }}
 
     p.text-danger(v-if="scaleTooLarge()")
-      | You cannot send an amount with more than 18 digits in the decimals.
+      | {{ $t('send_an_amount') }}
   
   div
-    p Send a message with your tip (optional):
+    p {{ $t('send_message_tip') }}:
     textarea.form-control(v-model="body", placeholder="Awesome post!")
 
   div(v-if="pendingTransaction")
     .alert.alert-primary.mt-3
-      p Please approve of this transaction to continue.
+      p {{ $t('approve_transaction')}}
         
 </template>
 
@@ -84,7 +84,7 @@ export default {
       modal.show();
       metamask.web3js.eth.getBalance(this.currentAccount.address, (error, balance) => {
         if (error) {
-          this.alertError("Sorry, we couldn't get your current balance.");
+          this.alertError(this.$t('error_get_current_balance'));
         } else {
           this.balanceBN = balance;
           this.balance = metamask.web3js.fromWei(balance);
@@ -109,7 +109,7 @@ export default {
       }, async (error, txHash) => {
         if (error) {
           console.log(error);
-          this.alertError("Sorry, there was an error when sending your transaction");
+          this.alertError(this.$t('error_send_balance'));
           this.pendingTransaction = false;
         } else {
           const data = {
@@ -128,14 +128,14 @@ export default {
 
             this.pendingTransaction = false;
             const { tx_url } = response;
-            let link = `<a href="${tx_url}">View Transaction</a>`;
-            this.alertSuccess("Your tip has been sent.", { text: link });
+            let link = `<a href="${tx_url}">this.$t('view_transaction')</a>`;
+            this.alertSuccess(this.$t('tip_send'), { text: link });
             this.$emit('response', response);
             this.$emit('sent', response);
             this.$refs.modal.hide();
           } catch (error) {
             console.log(error);
-            this.alertError("Your tip was sent, but we were unable to save it on the server.");
+            this.alertError(this.$t('error_sent_tip'));
           }
         }
       });

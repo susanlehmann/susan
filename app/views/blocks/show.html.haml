@@ -1,25 +1,25 @@
 .row
   .col-12
     %h1.mb-3
-      Block ##{@block.number}
+      = t("block") ##{@block.number}
       
     %dl.row
-      %dt.col-3 Hash
+      %dt.col-3 = t("hash")
       %dd.col-9= @block.hash_address
 
-      %dt.col-3 Miner
+      %dt.col-3 = t("miner")
       %dd.col-9= @block.miner
-      %dt.col-3 Nonce
+      %dt.col-3 = t("nonce")
       %dd.col-9= @block.nonce
-      %dt.col-3 Timestamp
+      %dt.col-3 = t("timestamp")
       %dd.col-9= @block.timestamp
-      %dt.col-3 Number
+      %dt.col-3 = t("num")
       %dd.col-9= @block.number
-      %dt.col-3 Difficulty
+      %dt.col-3 = t("diff")
       %dd.col-9= @block.difficulty
-      %dt.col-3 Size
+      %dt.col-3 = t("size")
       %dd.col-9= number_to_human_size @block.size
-      %dt.col-3 Gas Limit
+      %dt.col-3 = t("gas_limit")
       %dd.col-9= @block.gas_limit
-      %dt.col-3 Gas Used
+      %dt.col-3 = t("gas_used")
       %dd.col-9= @block.gas_used

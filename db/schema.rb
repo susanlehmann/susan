@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20180403205033) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "uuid"
-    t.decimal "balance_nuwei", precision: 1000, default: "0", null: false
+    t.decimal "balance_nuwei", precision: 1000, default: "0.0", null: false
     t.string "balance_currency", default: "BLOBLO", null: false
     t.boolean "is_user_pool", default: false, null: false
     t.text "bio"
@@ -242,7 +242,7 @@ ActiveRecord::Schema.define(version: 20180403205033) do
     t.integer "block_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "value_nuwei", precision: 32, default: "0", null: false
+    t.decimal "value_nuwei", precision: 32, null: false
     t.string "value_currency", default: "BLOBLO", null: false
     t.integer "message_id"
     t.integer "transactable_id"

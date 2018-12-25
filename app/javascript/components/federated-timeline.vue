@@ -1,7 +1,7 @@
 <template lang="jade">
 div
   alerts(ref="alerts")
-  p.small.text-muted Your federated timeline:
+  p.small.text-muted {{ $t('federated_timeline') }}:
   .federated-messages.mt-2(v-for='message in messages', :key="message.id")
     .card.mb-3
       .card-header
@@ -18,18 +18,17 @@ div
   div(v-if="loading")
     p
       i.fa.fa-spinner.fa-pulse.mr-2
-      | Hang on while we fetch your federated timeline
+      | {{ $t('hang_on_federated_timeline') }}
   div(v-else-if="!finished")
     div(v-observe-visibility="bottomVisible")
   div(v-if="!loading && followsCount === 0")
-    p.small You aren't following any federated accounts yet!
+    p.small {{ $t('not_follow_federated_account') }}
     p.small 
-      | Looking for a federated account to follow? Check out
+      | {{ $t('looking_federated_account') }}
       a(href="/federated/accounts/search?handle=@gargron@mastodon.social")  @gargron@mastodon.social
-      |  - the creator of Mastodon!
   div(v-else-if="finished")
     .space3
-    p Yep, this is as far as it goes.
+    p {{ $t('looking_continue') }}
 </template>
 
 <script>
@@ -67,7 +66,7 @@ export default {
           this.messages = this.messages.concat(result.messages);
         }
       } catch (error) {
-        this.alertError("Sorry, there was an error when fetching your federated timeline");
+        this.alertError(this.$t('fetching_federated_timeline'));
       }
 
       this.loading = false;
